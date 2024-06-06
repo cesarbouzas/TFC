@@ -1,0 +1,14 @@
+div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+div img {
+  width: 100%;
+  height: auto;
+}
+
+div img.selected {
+  border: 2px solid blue; /* Estilo visual para imágenes seleccionadas */
+}

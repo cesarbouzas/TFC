@@ -1,0 +1,13 @@
+<div class="container">
+<div>
+  <button (click)="mostrarOficia()">Controles Oficina</button>
+  <button (click)="mostrarTunel()">Control Túnel</button>
+</div>
+
+<div *ngIf="planoOficina">
+  <app-oficinamap></app-oficinamap>
+</div>
+<div *ngIf="planoTunel">
+  <app-tunelmap></app-tunelmap>
+</div>
+</div>
