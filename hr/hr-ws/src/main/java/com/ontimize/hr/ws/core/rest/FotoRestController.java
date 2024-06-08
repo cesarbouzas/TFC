@@ -1,19 +1,16 @@
 package com.ontimize.hr.ws.core.rest;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.ontimize.hr.api.core.service.IFotoService;
-import com.ontimize.hr.model.core.tools.ImageUtil;
 import com.ontimize.jee.server.rest.ORestController;
 
 @RestController
@@ -35,12 +32,12 @@ public class FotoRestController extends ORestController<IFotoService> {
          @RequestParam("nombre") String nombre,
          @RequestParam("latitud") Double latitud,
          @RequestParam("longitud") Double longitud,
-         @RequestParam("file") String file) {
-     if (file.isEmpty()) {
+         @RequestParam("archivo") String archivo) {
+     if (archivo.isEmpty()) {
          return ResponseEntity.badRequest().body("El archivo está vacío");
      }
 
-     byte[] decodedImage = java.util.Base64.getDecoder().decode(file);//Angular
+     byte[] decodedImage = java.util.Base64.getDecoder().decode(archivo);//Angular
 	 //byte[] fotoBytesPostman = ImageUtil.convertToByteArray(file.getInputStream());
 	 HashMap<String, Object> datos = new HashMap<>();
 	 datos.put("fot_nombre", nombre);

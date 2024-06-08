@@ -1,8 +1,6 @@
 package com.ontimize.hr.model.core.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +49,7 @@ public class FotoService implements IFotoService{
 						add(dao.ATTR_PICTURE);					
 					}
 				};
-				cf.setRequired(required);
+				//cf.setRequired(required);
 				//cf.validate(data);
 				data.put(dao.ATTR_PICTURE,fotoBytes);
 					resultado = daoHelper.insert(dao, data);
