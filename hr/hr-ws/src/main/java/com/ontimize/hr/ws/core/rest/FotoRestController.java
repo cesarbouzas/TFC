@@ -30,8 +30,8 @@ public class FotoRestController extends ORestController<IFotoService> {
  @PostMapping("/upload")
  public ResponseEntity<?> uploadFile(
          @RequestParam("nombre") String nombre,
-         @RequestParam("latitud") Double latitud,
-         @RequestParam("longitud") Double longitud,
+         @RequestParam("pk") Integer pk,
+         @RequestParam("cod") Integer codigo,
          @RequestParam("archivo") String archivo) {
      if (archivo.isEmpty()) {
          return ResponseEntity.badRequest().body("El archivo está vacío");
@@ -41,13 +41,13 @@ public class FotoRestController extends ORestController<IFotoService> {
 	 //byte[] fotoBytesPostman = ImageUtil.convertToByteArray(file.getInputStream());
 	 HashMap<String, Object> datos = new HashMap<>();
 	 datos.put("fot_nombre", nombre);
-	 datos.put("fot_latitud", latitud);
-	 datos.put("fot_longitud", longitud);
+	 datos.put("fot_pk", pk);
+	 datos.put("fot_cod", codigo);
 	 //datos.put("fot_foto", fotoBytesPostman);
 	 datos.put("fot_foto", decodedImage);
 	 this.fotoService.fotoInsert(datos);
 	 
-	 String mensaje = "Archivo recibido correctamente. Nombre: " + nombre + ", Latitud: " + latitud + ", Longitud: " + longitud;
+	 String mensaje = "Archivo recibido correctamente. Nombre: " + nombre + ", PK: " + pk + ", codigo: " + codigo;
 	 return ResponseEntity.ok().body(mensaje);
  }
 

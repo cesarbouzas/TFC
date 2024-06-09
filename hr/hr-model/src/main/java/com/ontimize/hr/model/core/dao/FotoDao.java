@@ -21,8 +21,8 @@ public class FotoDao extends OntimizeJdbcDaoSupport {
 	 public static final String ATTR_ID = TAG+"id";
 	    public static final String ATTR_NAME = TAG+"nombre";
 	    public static final String ATTR_DATE = TAG+"fecha";
-	    public static final String ATTR_LAT = TAG+"latitud";
-	    public static final String ATTR_LON = TAG+"longitud";
+	    public static final String ATTR_PK = TAG+"pk";
+	    public static final String ATTR_COD = TAG+"cod";
 	    public static final String ATTR_PICTURE = TAG+"foto";
 	    
 	    
@@ -32,8 +32,8 @@ public class FotoDao extends OntimizeJdbcDaoSupport {
 				put(ATTR_ID, type.INTEGER);
 				put(ATTR_NAME, type.STRING);
 				put(ATTR_DATE, type.DATE);
-				put(ATTR_LAT, type.DOUBLE);
-				put(ATTR_LON,type.DOUBLE);
+				put(ATTR_PK, type.INTEGER);
+				put(ATTR_COD,type.INTEGER);
 				put(ATTR_PICTURE,type.BYTETEA);
 				
 		}

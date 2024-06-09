@@ -19,7 +19,7 @@
         <java.version>11</java.version>
         <database.url>jdbc:postgresql://217.160.229.64:5432/postgres</database.url>
         <database.username>postgres</database.username>
-        <database.password>postgres</database.password>
+        <database.password>21212121</database.password>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
     </properties>
 
