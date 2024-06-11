@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SobreMiComponent } from './pages/sobreMi/sobreMi.component';
 import { NotFoundComponent } from './pages/notFound/notFound.component';
 import { IotComponent } from './pages/iot/iot.component';
-import { ConstruccionComponent } from './pages/construccion/construccion.component';
+import { LangosteriaComponent } from './pages/langosteira/langosteira.component';
+
 
 
 
@@ -11,7 +12,7 @@ import { ConstruccionComponent } from './pages/construccion/construccion.compone
 const routes: Routes = [
 
 
-  {path:'construccion',component:ConstruccionComponent},
+  {path:'langosteira',component:LangosteriaComponent},
   {path:'estudios',component:NotFoundComponent},
   {path:'iot',component:IotComponent},
   {path:'zonaB',component:NotFoundComponent},

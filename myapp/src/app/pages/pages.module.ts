@@ -3,8 +3,8 @@ import { ComponentsModule } from '../components/components.module';
 import { SobreMiComponent } from './sobreMi/sobreMi.component';
 import { NotFoundComponent } from './notFound/notFound.component';
 import { IotComponent } from './iot/iot.component';
-import { ConstruccionComponent } from './construccion/construccion.component';
 import { CommonModule } from '@angular/common';
+import { LangosteriaComponent } from './langosteira/langosteira.component';
 
 
 
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   SobreMiComponent,
   NotFoundComponent,
   IotComponent,
-  ConstruccionComponent
+ LangosteriaComponent
   ],
   imports: [
 CommonModule,
@@ -26,7 +26,7 @@ CommonModule,
     SobreMiComponent,
     NotFoundComponent,
     IotComponent,
-    ConstruccionComponent
+    LangosteriaComponent
   ],
 })
 export class PagesModule { }

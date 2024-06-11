@@ -1,4 +1,7 @@
 .active {
-  background: cyan;
+  background: grey;
   color: white;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
