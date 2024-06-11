@@ -31,7 +31,8 @@ public class FotoRestController extends ORestController<IFotoService> {
  public ResponseEntity<?> uploadFile(
          @RequestParam("nombre") String nombre,
          @RequestParam("pk") Integer pk,
-         @RequestParam("cod") Integer codigo,
+         @RequestParam("cod") String codigo,
+         @RequestParam("fecha") String fecha,
          @RequestParam("archivo") String archivo) {
      if (archivo.isEmpty()) {
          return ResponseEntity.badRequest().body("El archivo está vacío");
@@ -43,7 +44,7 @@ public class FotoRestController extends ORestController<IFotoService> {
 	 datos.put("fot_nombre", nombre);
 	 datos.put("fot_pk", pk);
 	 datos.put("fot_cod", codigo);
-	 //datos.put("fot_foto", fotoBytesPostman);
+	 datos.put("fot_fecha", fecha);
 	 datos.put("fot_foto", decodedImage);
 	 this.fotoService.fotoInsert(datos);
 	 
