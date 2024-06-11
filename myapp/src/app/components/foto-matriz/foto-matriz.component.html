@@ -1,3 +1,10 @@
-<div *ngFor="let foto of fotos">
-  <img [src]="foto" alt="Foto">
+<div class="container mt-5 d-flex justify-content-center">
+  <ngb-carousel  class="w-75">
+    <ng-template ngbSlide *ngFor="let foto of fotos">
+      <div class="d-flex justify-content-center align-items-center">
+        <img [src]="foto" class="img-fluid" style="max-height: 500px;" >
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
+

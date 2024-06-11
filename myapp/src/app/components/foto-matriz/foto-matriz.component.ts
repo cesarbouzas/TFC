@@ -1,5 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FotoServiceService } from '../../services/FotoService.service';
+import { Foto } from '../../models/foto.model';
 
 @Component({
   selector: 'app-foto-matriz',
@@ -10,40 +12,28 @@ export class FotoMatrizComponent implements OnInit {
   fotos: string[] = [];
   error: string | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private fotoService: FotoServiceService) { }
 
   ngOnInit(): void {
-    this.obtenerFotos();
+    this.fotoService.currentCodNum.subscribe(codNum => {
+      if (codNum !== null) {
+
+        this.obtenerFotos(codNum);
+      }
+    });
   }
 
-  obtenerFotos() {
-    const url = 'http://localhost:33333/fotos/foto?columns=fot_foto';
-
-    // Generar la cadena de autorización codificando las credenciales
-    const basicAuthHeader = 'Basic ' + btoa('demo:demouser');
-
-    // Crear las opciones para la solicitud HTTP
-    const options = {
-      headers: {
-        'Authorization': basicAuthHeader
-      }
-    };
-
-    // Hacer la solicitud HTTP con las opciones configuradas
-    this.http.get<any>(url, options).subscribe(
+  obtenerFotos(codNum: number) {
+    this.fotoService.obtenerFotosPorCodNum(codNum).subscribe(
       (response: any) => {
         console.log('Respuesta JSON:', response);
-        // Procesar la respuesta JSON aquí
-        if (response.data && Array.isArray(response.data)) {
-          response.data.forEach((imageData: any) => {
-            // Asumiendo que la propiedad 'fot_foto' contiene el objeto con los bytes de la imagen
-            if (imageData.fot_foto && typeof imageData.fot_foto.bytes === 'string') {
-              // Convertir los bytes a una URL de datos (data URL)
-              const dataUrl = this.convertirBytesADataUrl(imageData.fot_foto.bytes);
-              this.fotos.push(dataUrl);
-            }
-          });
-        }
+        this.fotos = []; // Limpiar la lista de fotos antes de agregar las nuevas
+        response.data.forEach((fotoData: any) => {
+          if (fotoData.fot_foto && fotoData.fot_foto.bytes) {
+            const dataUrl = this.convertirBytesADataUrl(fotoData.fot_foto.bytes);
+            this.fotos.push(dataUrl);
+          }
+        });
       },
       (error: HttpErrorResponse) => {
         if (error.status === 401) {
@@ -55,9 +45,9 @@ export class FotoMatrizComponent implements OnInit {
     );
   }
 
-  convertirBytesADataUrl(bytea: string): string {
-    // Convertir el string bytea a un array de bytes
-    const byteCharacters = atob(bytea);
+  convertirBytesADataUrl(byteString: string): string {
+    // Convertir el string byteString a un array de bytes
+    const byteCharacters = atob(byteString);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
@@ -72,6 +62,4 @@ export class FotoMatrizComponent implements OnInit {
 
     return imageUrl;
   }
-
-
 }

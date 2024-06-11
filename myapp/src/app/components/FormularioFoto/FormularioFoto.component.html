@@ -1,24 +1,42 @@
+<div class="container-sm mt-4 p-4" style="max-width: 600px; background-color: #f8f9fa; border-radius: 5px;">
+  <form>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre">
+    </div>
 
-<div>
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="nombre">
-</div>
-<div>
-  <label for="latitud">Latitud:</label>
-  <input type="number" step="0.01"  id="latitud" [(ngModel)]="latitud">
-</div>
-<div>
-  <label for="longitud">Longitud:</label>
-  <input type="number" step="0.01" id="longitud" [(ngModel)]="longitud">
-</div>
-<div>
-  <label for="fecha">Fecha:</label>
-  <input type="date" id="fecha" [(ngModel)]="fecha">
-</div>
-<input type="file" (change)="cargarImagen($event)">
-<div *ngIf="imagenActual">
-  <img [src]="imagenActual" alt="Imagen seleccionada">
-</div>
+    <div class="form-group">
+      <label for="pk">Pk :</label>
+      <input type="number" step="10" class="form-control" id="pk" [(ngModel)]="pk" name="pk">
+    </div>
 
-<button (click)="guardarCambios()">Guardar Cambios</button>
+    <div class="form-group">
+      <label for="opcion">Opciones:</label>
+      <select id="opcion" class="form-control" [(ngModel)]="opcionSeleccionada" (change)="onSelectionChange()" name="opcion">
+        <option *ngFor="let opcion of opciones" [value]="opcion.cod_num">
+          {{ opcion.cod_num }} - {{ opcion.cod_descripcion }}
+        </option>
+      </select>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="fecha">Fecha:</label>
+      <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha">
+    </div>
+   <hr>
+    <div class="form-group">
+      <label for="imagen">Imagen:</label>
+      <input type="file" class="form-control-file" id="imagen" (change)="cargarImagen($event)">
+    </div>
+
+
+    <div *ngIf="imagenActual" class="form-group mt-3">
+      <img [src]="imagenActual" alt="Imagen seleccionada" class="img-thumbnail">
+    </div>
+
+    <button type="button" class="btn btn-primary mt-3" (click)="guardarCambios()">Guardar Cambios</button>
+  </form>
+</div>
 

@@ -1,21 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FotoServiceService } from '../../services/FotoService.service';
-
+import { CodigoService } from '../../services/Codigo.service';
 
 @Component({
   selector: 'app-FormularioFoto',
   templateUrl: './FormularioFoto.component.html',
   styleUrls: ['./FormularioFoto.component.css']
 })
-export class FormularioFotoComponent {
+export class FormularioFotoComponent implements OnInit {
 
-  imagenActual: File | null = null;
+  opciones:any[]=[];
+  opcionSeleccionada: any;
+  imagenActual: string | ArrayBuffer | null = null;
   nombre: string ="";
-  latitud: number | null = null;
-  longitud: number | null = null;
+  pk: number | null = null;
+  codigo: number | null = null;
   fecha: string | null = null;
 
-  constructor(private fotoService: FotoServiceService) { }
+  constructor(private codigoService: CodigoService ,private fotoService: FotoServiceService) { }
+  ngOnInit(): void {
+    this.codigoService.getOptions().subscribe(data => {
+      this.opciones = data;
+      if (this.opciones.length > 0) {
+        this.opcionSeleccionada = this.opciones[0].cod_num;
+        this.fotoService.cambiarCodNum(this.opcionSeleccionada);
+      }
+    });
+  }
+
+  onSelectionChange() {
+    console.log(this.opcionSeleccionada);
+    this.fotoService.cambiarCodNum(this.opcionSeleccionada);
+  }
+
 
   cargarImagen(event: any) {
     const files = event.target.files;
@@ -32,7 +49,7 @@ export class FormularioFotoComponent {
         console.error('El tamaño del archivo excede el límite máximo permitido.');
         return;
       }
-      // Lectura del archivo
+      // Lectura del archivo como base64
       const reader = new FileReader();
       reader.onload = (e: any) => {
         // Asignar la imagen al atributo imagenActual
@@ -42,30 +59,28 @@ export class FormularioFotoComponent {
     }
   }
 
-  buscarImagen(id: number) {
-    this.fotoService.buscarImagenPorId(id).subscribe(imagen => {
-      this.imagenActual = imagen;
-    });
-  }
-
-
-
   guardarCambios() {
     if (this.imagenActual) {
       const formData = new FormData();
-      formData.append('nombre', this.nombre || '');
-      formData.append('latitud', this.latitud?.toString() || '');
-      formData.append('longitud', this.longitud?.toString() || '');
-      formData.append('file', this.imagenActual);
+      let imageData: string | null = null;
+      if (typeof this.imagenActual === 'string') {
+        imageData = this.imagenActual.split(',')[1]; // Obtener la parte de la cadena después de la coma
+      }
+
+      formData.append('nombre', this.nombre);
+      console.log(this.nombre);
+      formData.append('pk', this.pk?.toString() || '');
+      formData.append('fecha',this.fecha?.toString()||'');
+      formData.append('cod', this.opcionSeleccionada);
+      formData.append('archivo', imageData || ''); // Agregar solo la parte de la cadena Base64 al FormData
 
       this.fotoService.uploadFoto(formData).subscribe(
         (response) => {
           // Manejar la respuesta del servidor si es necesario
           console.log('Imagen cargada con éxito:', response);
           // Reiniciar valores
-
-          this.latitud = null;
-          this.longitud = null;
+          this.pk = null;
+          this.codigo= null;
           this.fecha = null;
           this.imagenActual = null;
         },
@@ -78,10 +93,4 @@ export class FormularioFotoComponent {
       console.warn('No se ha seleccionado ninguna imagen para cargar.');
     }
   }
-
-  }
-
-
-
-
-
+}
