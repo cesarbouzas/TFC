@@ -45,11 +45,13 @@ public class FotoService implements IFotoService{
 				cf.addBasics(dao.fields);
 				List<String> required = new ArrayList<>() {
 					{
+						
 						add(dao.ATTR_NAME);
+						add(dao.ATTR_COD);
 						add(dao.ATTR_PICTURE);					
 					}
 				};
-				//cf.setRequired(required);
+				cf.setRequired(required);
 				//cf.validate(data);
 				data.put(dao.ATTR_PICTURE,fotoBytes);
 					resultado = daoHelper.insert(dao, data);

@@ -33,7 +33,7 @@ public class FotoDao extends OntimizeJdbcDaoSupport {
 				put(ATTR_NAME, type.STRING);
 				put(ATTR_DATE, type.DATE);
 				put(ATTR_PK, type.INTEGER);
-				put(ATTR_COD,type.INTEGER);
+				put(ATTR_COD,type.STRING);
 				put(ATTR_PICTURE,type.BYTETEA);
 				
 		}

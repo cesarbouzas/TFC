@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { FotoServiceService } from '../../services/FotoService.service';
 import { CodigoService } from '../../services/Codigo.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-FormularioFoto',
@@ -9,50 +10,58 @@ import { CodigoService } from '../../services/Codigo.service';
 })
 export class FormularioFotoComponent implements OnInit {
 
-  opciones:any[]=[];
+  opciones: any[] = [];
   opcionSeleccionada: any;
   imagenActual: string | ArrayBuffer | null = null;
-  nombre: string ="";
+  nombre: string = "";
   pk: number | null = null;
-  codigo: number | null = null;
   fecha: string | null = null;
+  mensaje: string = '';
+  error: string | null = null;
 
-  constructor(private codigoService: CodigoService ,private fotoService: FotoServiceService) { }
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+  constructor(
+    private codigoService: CodigoService,
+    private fotoService: FotoServiceService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
   ngOnInit(): void {
+    this.loadOptions();
+  }
+
+  loadOptions(): void {
     this.codigoService.getOptions().subscribe(data => {
       this.opciones = data;
       if (this.opciones.length > 0) {
-        this.opcionSeleccionada = this.opciones[0].cod_num;
+        const savedSelectedOption = localStorage.getItem('selectedOption');
+        this.opcionSeleccionada = savedSelectedOption ? savedSelectedOption : this.opciones[0].cod_num;
         this.fotoService.cambiarCodNum(this.opcionSeleccionada);
       }
     });
   }
 
   onSelectionChange() {
-    console.log(this.opcionSeleccionada);
     this.fotoService.cambiarCodNum(this.opcionSeleccionada);
+    localStorage.setItem('selectedOption', this.opcionSeleccionada);
   }
-
 
   cargarImagen(event: any) {
     const files = event.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      // Verificar si es un tipo de archivo válido (por ejemplo, imagen)
       if (!file.type.startsWith('image/')) {
         console.error('El archivo seleccionado no es una imagen.');
         return;
       }
-      // Verificar el tamaño del archivo si es necesario
       const maxSizeInBytes = 10 * 1024 * 1024; // 10MB
       if (file.size > maxSizeInBytes) {
         console.error('El tamaño del archivo excede el límite máximo permitido.');
         return;
       }
-      // Lectura del archivo como base64
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        // Asignar la imagen al atributo imagenActual
         this.imagenActual = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -68,29 +77,37 @@ export class FormularioFotoComponent implements OnInit {
       }
 
       formData.append('nombre', this.nombre);
-      console.log(this.nombre);
       formData.append('pk', this.pk?.toString() || '');
-      formData.append('fecha',this.fecha?.toString()||'');
+      formData.append('fecha', this.fecha?.toString() || '');
       formData.append('cod', this.opcionSeleccionada);
-      formData.append('archivo', imageData || ''); // Agregar solo la parte de la cadena Base64 al FormData
+      formData.append('archivo', imageData || '');
 
       this.fotoService.uploadFoto(formData).subscribe(
         (response) => {
-          // Manejar la respuesta del servidor si es necesario
           console.log('Imagen cargada con éxito:', response);
-          // Reiniciar valores
-          this.pk = null;
-          this.codigo= null;
-          this.fecha = null;
-          this.imagenActual = null;
+          this.mensaje = 'Foto cargada con éxito.';
+          this.resetForm(); // Reiniciar el formulario después de una carga exitosa
         },
-        (error) => {
-          // Manejar cualquier error que ocurra durante la carga de la imagen
+        (error: HttpErrorResponse) => {
           console.error('Error al cargar la imagen:', error);
+          this.error = 'Error al cargar la foto: ' + error.message;
         }
       );
     } else {
       console.warn('No se ha seleccionado ninguna imagen para cargar.');
     }
+  }
+
+  resetForm() {
+    this.nombre = '';
+    this.pk = null;
+    this.fecha = null;
+    this.imagenActual = null;
+    this.mensaje = '';
+    this.error = null;
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.value = ''; // Limpiar el valor del input de tipo file
+    }
+    this.loadOptions(); // Recargar opciones después de reiniciar el formulario
   }
 }

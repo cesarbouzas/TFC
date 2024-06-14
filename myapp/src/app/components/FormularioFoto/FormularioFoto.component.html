@@ -19,18 +19,17 @@
       </select>
     </div>
 
-
-
     <div class="form-group">
       <label for="fecha">Fecha:</label>
       <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha">
     </div>
-   <hr>
+
+    <hr>
+
     <div class="form-group">
       <label for="imagen">Imagen:</label>
-      <input type="file" class="form-control-file" id="imagen" (change)="cargarImagen($event)">
+      <input type="file" class="form-control-file" id="imagen" #fileInput (change)="cargarImagen($event)">
     </div>
-
 
     <div *ngIf="imagenActual" class="form-group mt-3">
       <img [src]="imagenActual" alt="Imagen seleccionada" class="img-thumbnail">
@@ -39,4 +38,3 @@
     <button type="button" class="btn btn-primary mt-3" (click)="guardarCambios()">Guardar Cambios</button>
   </form>
 </div>
-

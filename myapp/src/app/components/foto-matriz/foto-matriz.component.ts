@@ -17,13 +17,12 @@ export class FotoMatrizComponent implements OnInit {
   ngOnInit(): void {
     this.fotoService.currentCodNum.subscribe(codNum => {
       if (codNum !== null) {
-
         this.obtenerFotos(codNum);
       }
     });
   }
 
-  obtenerFotos(codNum: number) {
+  obtenerFotos(codNum: string) {
     this.fotoService.obtenerFotosPorCodNum(codNum).subscribe(
       (response: any) => {
         console.log('Respuesta JSON:', response);
@@ -46,7 +45,6 @@ export class FotoMatrizComponent implements OnInit {
   }
 
   convertirBytesADataUrl(byteString: string): string {
-    // Convertir el string byteString a un array de bytes
     const byteCharacters = atob(byteString);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
@@ -54,10 +52,8 @@ export class FotoMatrizComponent implements OnInit {
     }
     const byteArray = new Uint8Array(byteNumbers);
 
-    // Crear un Blob a partir del array de bytes
     const blob = new Blob([byteArray], { type: 'image/jpeg' });
 
-    // Crear una URL de datos (data URL) para el Blob
     const imageUrl = URL.createObjectURL(blob);
 
     return imageUrl;

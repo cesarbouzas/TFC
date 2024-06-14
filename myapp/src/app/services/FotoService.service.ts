@@ -9,7 +9,7 @@ import { Foto } from '../models/foto.model';
 })
 export class FotoServiceService {
 
-  private codNumSource = new BehaviorSubject<number | null>(null);
+  private codNumSource = new BehaviorSubject<string | null>(null);
   currentCodNum = this.codNumSource.asObservable();
 
   constructor(private http: HttpClient) {
@@ -20,19 +20,18 @@ export class FotoServiceService {
     return new HttpHeaders().set('Authorization', 'Basic ' + btoa('demo:demouser'));
   }
 
-  cambiarCodNum(codNum: number) {
+  cambiarCodNum(codNum: string) {
 
     this.codNumSource.next(codNum);
   }
 
-  obtenerFotosPorCodNum(codNum: number): Observable<Foto[]> {
+  obtenerFotosPorCodNum(codNum: string): Observable<Foto[]> {
     const headers = FotoServiceService.getHeaders();
  // Convertir el código a número si es una cadena
- const codigoNumerico: number = typeof codNum === 'string' ? parseInt(codNum, 10) : codNum;
 
  const body = {
    filter: {
-     fot_cod: codigoNumerico // Pasar el código convertido a número
+     fot_cod: codNum // Pasar el código convertido a número
    },
    columns: [
      "fot_foto"
