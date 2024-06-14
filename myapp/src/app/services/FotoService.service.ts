@@ -31,7 +31,7 @@ export class FotoServiceService {
 
  const body = {
    filter: {
-     fot_cod: codNum // Pasar el código convertido a número
+     fot_cod: codNum 
    },
    columns: [
      "fot_foto"
