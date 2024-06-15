@@ -9,6 +9,7 @@ import { FormularioFotoComponent } from './FormularioFoto/FormularioFoto.compone
 import { NgbCarouselModule, NgbModule, NgbSlide } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { EmpleadosInfoComponent } from './empleados-info/empleados-info.component';
 
 
 @NgModule({
@@ -19,6 +20,8 @@ declarations:[
   OficinaMapComponent,
   FotoMatrizComponent,
   FormularioFotoComponent,
+  EmpleadosInfoComponent,
+
 
 ],
 imports:[
@@ -36,7 +39,8 @@ TunelMapComponent,
 FotoMatrizComponent,
 OficinaMapComponent,
 FormularioFotoComponent,
-FotoMatrizComponent
+EmpleadosInfoComponent,
+
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

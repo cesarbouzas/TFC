@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { IotDataService } from '../../services/iot-data.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-iot',

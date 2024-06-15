@@ -4,7 +4,9 @@ import { SobreMiComponent } from './sobreMi/sobreMi.component';
 import { NotFoundComponent } from './notFound/notFound.component';
 import { IotComponent } from './iot/iot.component';
 import { CommonModule } from '@angular/common';
-import { LangosteriaComponent } from './langosteira/langosteira.component';
+import { LangosteriaFotosComponent } from './langosteira/langosteiraFotos/langosteiraFotos.component';
+import { LangosteiraEmpleadosComponent } from './langosteira/langosteiraEmpleados/langosteiraEmpleados.component';
+
 
 
 
@@ -15,10 +17,15 @@ import { LangosteriaComponent } from './langosteira/langosteira.component';
   SobreMiComponent,
   NotFoundComponent,
   IotComponent,
- LangosteriaComponent
+  LangosteriaFotosComponent,
+  LangosteiraEmpleadosComponent
+
+
+
+
   ],
   imports: [
-CommonModule,
+    CommonModule,
     ComponentsModule
 
   ],
@@ -26,7 +33,9 @@ CommonModule,
     SobreMiComponent,
     NotFoundComponent,
     IotComponent,
-    LangosteriaComponent
+    LangosteriaFotosComponent,
+    LangosteiraEmpleadosComponent
+
   ],
 })
 export class PagesModule { }

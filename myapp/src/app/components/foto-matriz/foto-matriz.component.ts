@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FotoServiceService } from '../../services/FotoService.service';
-import { Foto } from '../../models/foto.model';
+
 
 @Component({
   selector: 'app-foto-matriz',
