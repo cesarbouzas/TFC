@@ -74,6 +74,7 @@ public class FotoService implements IFotoService{
 @Override
 public EntityResult fotoQuery(Map<String, Object> keyMap, List<String> attrList)
   throws OntimizeJEERuntimeException {
+	System.out.print(this.daoHelper.query(dao, keyMap, attrList).toString());
  return this.daoHelper.query(this.dao, keyMap, attrList);
 }
 
