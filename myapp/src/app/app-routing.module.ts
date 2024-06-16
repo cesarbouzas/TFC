@@ -6,6 +6,8 @@ import { IotComponent } from './pages/iot/iot.component';
 
 import { EmpleadosInfoComponent } from './components/empleados-info/empleados-info.component';
 import { LangosteriaFotosComponent } from './pages/langosteira/langosteiraFotos/langosteiraFotos.component';
+import { RepositorioComponent } from './pages/repositorio/repositorio.component';
+
 
 
 
@@ -16,7 +18,7 @@ const routes: Routes = [
 
   {path:'langosteira/fotos',component:LangosteriaFotosComponent},
   {path:'langosteira/empleados',component:EmpleadosInfoComponent},
-  {path:'estudios',component:NotFoundComponent},
+  {path:'repositorio/:tipo',component:RepositorioComponent},
   {path:'iot',component:IotComponent},
   {path:'zonaB',component:NotFoundComponent},
   {path:'sobreMi',component:SobreMiComponent},

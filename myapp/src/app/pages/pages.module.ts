@@ -6,6 +6,8 @@ import { IotComponent } from './iot/iot.component';
 import { CommonModule } from '@angular/common';
 import { LangosteriaFotosComponent } from './langosteira/langosteiraFotos/langosteiraFotos.component';
 import { LangosteiraEmpleadosComponent } from './langosteira/langosteiraEmpleados/langosteiraEmpleados.component';
+import { RepositorioComponent } from './repositorio/repositorio.component';
+import { SafeUrlPipe } from '../safe-url.pipe';
 
 
 
@@ -18,8 +20,9 @@ import { LangosteiraEmpleadosComponent } from './langosteira/langosteiraEmpleado
   NotFoundComponent,
   IotComponent,
   LangosteriaFotosComponent,
-  LangosteiraEmpleadosComponent
-
+  LangosteiraEmpleadosComponent,
+  RepositorioComponent,
+SafeUrlPipe
 
 
 
@@ -34,7 +37,8 @@ import { LangosteiraEmpleadosComponent } from './langosteira/langosteiraEmpleado
     NotFoundComponent,
     IotComponent,
     LangosteriaFotosComponent,
-    LangosteiraEmpleadosComponent
+    LangosteiraEmpleadosComponent,
+    RepositorioComponent
 
   ],
 })

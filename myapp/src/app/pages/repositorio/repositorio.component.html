@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div *ngIf="url" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ tipo }} Repositorio</h5>
+          <p class="card-text">{{ descripcion }}</p>
+          <a [href]="url" target="_blank" class="btn btn-primary">Ir al repositorio</a>
+        </div>
+      </div>
+      <div *ngIf="!url" class="alert alert-danger" role="alert">
+        {{ descripcion }}
+      </div>
+    </div>
+  </div>
+</div>

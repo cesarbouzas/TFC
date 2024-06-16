@@ -25,9 +25,12 @@ ontimize:
       sql-condition-processor:
          upper-string: true
          upper-like: true
+  
    security:
       mode: default
       ignore-paths: /app/**
+      headers:
+      content-security-policy: "frame-ancestors 'self' https://github.com"
       role-information-service:
          role-repository: UserRoleDao
          role-name-column: ROLENAME

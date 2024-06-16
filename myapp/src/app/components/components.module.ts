@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { EmpleadosInfoComponent } from './empleados-info/empleados-info.component';
 
 
+
 @NgModule({
 declarations:[
   FooterComponent,
@@ -21,6 +22,7 @@ declarations:[
   FotoMatrizComponent,
   FormularioFotoComponent,
   EmpleadosInfoComponent,
+
 
 
 ],
@@ -40,6 +42,7 @@ FotoMatrizComponent,
 OficinaMapComponent,
 FormularioFotoComponent,
 EmpleadosInfoComponent,
+
 
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],

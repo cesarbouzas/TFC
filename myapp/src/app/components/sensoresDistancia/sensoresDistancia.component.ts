@@ -26,15 +26,12 @@ export class SensoresDistanciaComponent {
       (response) => {
         console.log('Respuesta JSON:', response);
 
-        response.data.forEach((datosjson: any) => {
+        response.forEach((datosjson: any) => {
 
-          datosjson.emp_id,
-          datosjson.emp_nombre,
-          datosjson.emp_apellido1,
-          datosjson.emp_apellido2,
-          datosjson.emp_puesto,
-          datosjson.emp_telefono,
-          datosjson.emp_password
+          datosjson.send_id
+          datosjson.send_fecha,
+          datosjson.send_med
+
         });
       },
       (error) => {
