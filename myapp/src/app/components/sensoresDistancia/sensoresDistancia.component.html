@@ -1,0 +1,18 @@
+<h2>Tabla de Datos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Distancia (cm)</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dato of datos">
+      <td>{{ dato.id }}</td>
+      <td>{{ dato.distancia }}</td>
+      <td>{{ dato.fecha }}</td>
+    </tr>
+  </tbody>
+</table>
