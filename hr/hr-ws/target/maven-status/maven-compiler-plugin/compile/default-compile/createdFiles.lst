@@ -1,0 +1,4 @@
+com\ontimize\hr\ws\core\rest\ContactoRestController.class
+com\ontimize\hr\ws\core\rest\ContactoCategoriaRestController.class
+com\ontimize\hr\ws\core\rest\SensoresListRestController.class
+com\ontimize\hr\ws\core\rest\SensoresDistanciaRestController.class
